@@ -11,10 +11,10 @@ const LeftSidebar = ({ allShapes }: { allShapes: Array<any> }) => {
         () => (
             <section className="flex flex-col border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 min-w-[227px] sticky left-0 h-full max-sm:hidden select-none overflow-y-auto pb-20">
                 <div className='text-white'>
-                    <h1>1. On Development Mode</h1>
-                    <p>2. Open the application on two tabs and try to draw the shapes to implement liveblocks</p>
-                    <p>3. Press 'E' to display live Emojis, then select one and click inside green area</p>
-                    <p>4. Press '/' to chat with each other</p>
+                    <h1>1 On Development Mode</h1>
+                    <p>2 Open the application on two tabs and try to draw the shapes to implement liveblocks</p>
+                    <p>3 Press E to display live Emojis then select one and click inside green area</p>
+                    <p>4 Press / to chat with each other</p>
                 </div>
 
                 <h3 className="border border-primary-grey-200 px-5 py-4 text-xs uppercase">Layers</h3>
