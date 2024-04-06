@@ -343,41 +343,66 @@ export const renderCanvas = ({
   // clear canvas
   fabricRef.current?.clear();
 
-  // render all objects on canvas
-  Array.from(canvasObjects, ([objectId, objectData]) => {
-    /**
-     * enlivenObjects() is used to render objects on canvas.
-     * It takes two arguments:
-     * 1. objectData: object data to render on canvas
-     * 2. callback: callback function to execute after rendering objects
-     * on canvas
-     *
-     * enlivenObjects: http://fabricjs.com/docs/fabric.util.html#.enlivenObjectEnlivables
-     */
-    fabric.util.enlivenObjects(
-      [objectData],
-      (enlivenedObjects: fabric.Object[]) => {
-        enlivenedObjects.forEach((enlivenedObj) => {
-          // if element is active, keep it in active state so that it can be edited further
-          if (activeObjectRef.current?.objectId === objectId) {
-            fabricRef.current?.setActiveObject(enlivenedObj);
-          }
+  // // render all objects on canvas
+  // Array.from(canvasObjects, ([objectId, objectData]) => {
+  //   /**
+  //    * enlivenObjects() is used to render objects on canvas.
+  //    * It takes two arguments:
+  //    * 1. objectData: object data to render on canvas
+  //    * 2. callback: callback function to execute after rendering objects
+  //    * on canvas
+  //    *
+  //    * enlivenObjects: http://fabricjs.com/docs/fabric.util.html#.enlivenObjectEnlivables
+  //    */
+  //   fabric.util.enlivenObjects(
+  //     [objectData],
+  //     (enlivenedObjects: fabric.Object[]) => {
+  //       enlivenedObjects.forEach((enlivenedObj) => {
+  //         // if element is active, keep it in active state so that it can be edited further
+  //         if (activeObjectRef.current?.objectId === objectId) {
+  //           fabricRef.current?.setActiveObject(enlivenedObj);
+  //         }
 
-          // add object to canvas
-          fabricRef.current?.add(enlivenedObj);
-        });
-      },
-      /**
-       * specify namespace of the object for fabric to render it on canvas
-       * A namespace is a string that is used to identify the type of
-       * object.
-       *
-       * Fabric Namespace: http://fabricjs.com/docs/fabric.html
-       */
-      "fabric"
-    );
-  });
+  //         // add object to canvas
+  //         fabricRef.current?.add(enlivenedObj);
+  //       });
+  //     },
+  //     /**
+  //      * specify namespace of the object for fabric to render it on canvas
+  //      * A namespace is a string that is used to identify the type of
+  //      * object.
+  //      *
+  //      * Fabric Namespace: http://fabricjs.com/docs/fabric.html
+  //      */
+  //     "fabric"
+  //   );
+  // });
 
+
+
+  if (canvasObjects) {
+    Array.from(canvasObjects, ([objectId, objectData]) => {
+      // Your existing code for rendering objects
+      fabric.util.enlivenObjects(
+        [objectData],
+        (enlivenedObjects) => {
+          enlivenedObjects.forEach((enlivenedObj) => {
+            if (activeObjectRef.current?.objectId === objectId) {
+              fabricRef.current?.setActiveObject(enlivenedObj);
+            }
+            fabricRef.current?.add(enlivenedObj);
+          });
+        },
+        "fabric"
+      );
+    });
+  } else {
+    console.error('canvasObjects is undefined or not iterable');
+    // Handle the error appropriately, e.g., show a message to the user or fallback logic
+  }
+
+  
+  
   fabricRef.current?.renderAll();
 };
 
